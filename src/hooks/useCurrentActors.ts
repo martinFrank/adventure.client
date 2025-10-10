@@ -1,0 +1,35 @@
+import { useState, useEffect } from 'react';
+import { api } from '../api';
+
+interface Actor {
+  id: string;
+  type: string;
+  description: string;
+  locationId: string;
+}
+
+export function useCurrentActors() {
+  const [actors, setActors] = useState<Actor[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCurrentActors = async () => {
+      try {
+        setLoading(true);
+        const response = await api.get('/game/current-actors');
+        setActors(response.data);
+        setError(null);
+      } catch (err) {
+        setError('Failed to load current actors');
+        console.error('Error fetching current actors:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCurrentActors();
+  }, []);
+
+  return { actors, loading, error };
+}

@@ -1,12 +1,16 @@
 import { useCurrentUser } from "../hooks/useCurrentUser";
 import { useAdventure } from "../hooks/useAdventure";
 import { usePlayer } from "../hooks/usePlayer";
+import { useCurrentLocation } from "../hooks/useCurrentLocation";
+import { useCurrentActors } from "../hooks/useCurrentActors";
 import './AdventurePage.css';
 
 export default function AdventurePage() {
   const user = useCurrentUser();
   const { adventure, loading: adventureLoading, error: adventureError } = useAdventure();
   const { player, loading: playerLoading, error: playerError } = usePlayer();
+  const { location, loading: locationLoading, error: locationError } = useCurrentLocation();
+  const { actors, loading: actorsLoading, error: actorsError } = useCurrentActors();
 
   if (!user) {
     return (
@@ -21,7 +25,7 @@ export default function AdventurePage() {
     );
   }
 
-  if (adventureLoading || playerLoading) {
+  if (adventureLoading || playerLoading || locationLoading || actorsLoading) {
     return (
       <div className="adventure-page">
         <div className="adventure-content">
@@ -34,7 +38,7 @@ export default function AdventurePage() {
     );
   }
 
-  if (adventureError || playerError) {
+  if (adventureError || playerError || locationError || actorsError) {
     return (
       <div className="adventure-page">
         <div className="adventure-content">
@@ -42,6 +46,8 @@ export default function AdventurePage() {
             <h2>⚠️ Fehler beim Laden der Daten</h2>
             {adventureError && <p>Adventure: {adventureError}</p>}
             {playerError && <p>Spieler: {playerError}</p>}
+            {locationError && <p>Location: {locationError}</p>}
+            {actorsError && <p>Actors: {actorsError}</p>}
           </div>
         </div>
       </div>
@@ -90,32 +96,35 @@ export default function AdventurePage() {
 
         <div className="game-panels">
           <section className="locations-panel">
-            <h3>🗺️ Orte ({adventure.locations?.length || 0})</h3>
+            <h3>🗺️ Aktueller Ort</h3>
             <div className="locations-grid">
-              {adventure.locations?.map((location) => (
-                <div key={location.id} className="location-card">
+              {location ? (
+                <div className="location-card current-location">
                   <h4>📍 {location.type.replace(/_/g, ' ')}</h4>
                   <p>{location.generation}</p>
                   <div className="connections">
                     <small>🔗 Verbindungen: {location.toLocationIds?.length || 0}</small>
                   </div>
                 </div>
-              ))}
+              ) : (
+                <p>Keine Location verfügbar</p>
+              )}
             </div>
           </section>
 
           <section className="actors-panel">
-            <h3>👥 Charaktere ({adventure.actors?.length || 0})</h3>
+            <h3>👥 Charaktere am aktuellen Ort ({actors?.length || 0})</h3>
             <div className="actors-list">
-              {adventure.actors?.map((actor) => (
-                <div key={actor.id} className="actor-card">
-                  <h4>🎭 {actor.id.replace(/_/g, ' ')}</h4>
-                  <p>{actor.description}</p>
-                  <div className="actor-location">
-                    <small>📍 Ort: {actor.locationId?.replace(/_/g, ' ')}</small>
+              {actors && actors.length > 0 ? (
+                actors.map((actor) => (
+                  <div key={actor.id} className="actor-card">
+                    <h4>🎭 {actor.id.replace(/_/g, ' ')}</h4>
+                    <p>{actor.description}</p>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p>Keine Charaktere am aktuellen Ort</p>
+              )}
             </div>
           </section>
 

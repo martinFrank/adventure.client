@@ -141,7 +141,9 @@
   gap: var(--spacing-xl);
 }
 
-.locations-panel, .actors-panel, .quests-panel {
+.locations-panel,
+.actors-panel,
+.quests-panel {
   background: var(--card-background);
   backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
@@ -152,7 +154,9 @@
   overflow: hidden;
 }
 
-.locations-panel::before, .actors-panel::before, .quests-panel::before {
+.locations-panel::before,
+.actors-panel::before,
+.quests-panel::before {
   content: '';
   position: absolute;
   top: 0;
@@ -168,7 +172,9 @@
   grid-column: 1 / -1;
 }
 
-.locations-panel h3, .actors-panel h3, .quests-panel h3 {
+.locations-panel h3,
+.actors-panel h3,
+.quests-panel h3 {
   margin: 0 0 var(--spacing-lg) 0;
   color: var(--primary-color);
   font-size: var(--font-size-xl);
@@ -183,7 +189,9 @@
   gap: var(--spacing-md);
 }
 
-.location-card, .actor-card, .quest-card {
+.location-card,
+.actor-card,
+.quest-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
@@ -191,14 +199,29 @@
   transition: all 0.3s ease;
 }
 
-.location-card:hover, .actor-card:hover, .quest-card:hover {
+.location-card.current-location {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.15));
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.location-card.current-location h4 {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.location-card:hover,
+.actor-card:hover,
+.quest-card:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--border-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
 }
 
-.location-card h4, .actor-card h4, .quest-card h4 {
+.location-card h4,
+.actor-card h4,
+.quest-card h4 {
   margin: 0 0 var(--spacing-sm) 0;
   color: var(--text-primary);
   text-transform: capitalize;
@@ -206,26 +229,32 @@
   font-weight: 600;
 }
 
-.location-card p, .actor-card p, .quest-card p {
+.location-card p,
+.actor-card p,
+.quest-card p {
   margin: 0 0 var(--spacing-md) 0;
   font-size: var(--font-size-base);
   line-height: 1.5;
   color: var(--text-secondary);
 }
 
-.connections, .actor-location, .quest-status {
+.connections,
+.actor-location,
+.quest-status {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: var(--spacing-md);
 }
 
-.connections small, .actor-location small {
+.connections small,
+.actor-location small {
   color: var(--text-muted);
   font-size: var(--font-size-sm);
 }
 
-.actors-list, .quests-list {
+.actors-list,
+.quests-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--spacing-md);
@@ -249,13 +278,13 @@
     align-items: center;
     gap: var(--spacing-lg);
   }
-  
+
   .character-info {
     flex-direction: row;
     align-items: center;
     gap: var(--spacing-md);
   }
-  
+
   .character-details {
     font-size: var(--font-size-base);
   }
@@ -265,34 +294,42 @@
   .adventure-page {
     padding: var(--spacing-md);
   }
-  
+
   .game-panels {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
   }
-  
+
   .adventure-header {
     padding: var(--spacing-lg);
   }
-  
+
   .adventure-header h1 {
     font-size: var(--font-size-2xl);
   }
-  
-  .locations-grid, .actors-list, .quests-list {
+
+  .locations-grid,
+  .actors-list,
+  .quests-list {
     grid-template-columns: 1fr;
   }
-  
-  .location-card, .actor-card, .quest-card {
+
+  .location-card,
+  .actor-card,
+  .quest-card {
     padding: var(--spacing-md);
   }
 }
 
 @media (max-width: 480px) {
-  .plot-section, .locations-panel, .actors-panel, .quests-panel {
+
+  .plot-section,
+  .locations-panel,
+  .actors-panel,
+  .quests-panel {
     padding: var(--spacing-lg);
   }
-  
+
   .adventure-header h1 {
     font-size: var(--font-size-xl);
   }
