@@ -2,43 +2,88 @@ import { useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import "./LoginPage.css";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    //   const handleSubmit = async (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     const res = await axios.post("http://localhost:8080/api/auth/login", {
-    //       username,
-    //       password,
-    //     });
-    //     login(res.data.token);
-    //     navigate("/");
-    //   };
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsLoading(true);
+        setError("");
+        
         try {
-            //const res = await axios.post("/auth/login", { username, password });
-            const res = await axios.post("http://localhost:8080/api/auth/login", { username, password });
-            //const res = await axios.post("http://192.168.0.24:8080/api/auth/login", { username, password });
-            //const res = await axios.post("http://backend/api/auth/login", { username, password });
-            //const res = await axios.post("https://localhost:8443/api/auth/login", { username, password });
-            login(res.data.token); // <- muss aufgerufen werden
+            const res = await axios.post("http://localhost:8080/api/auth/login", {
+                username,
+                password
+            });
+            login(res.data.token);
             navigate("/");
-        } catch (err) {
+        } catch (err: any) {
             console.error(err);
+            setError(
+                err.response?.data?.message ||
+                "Login fehlgeschlagen. Bitte prüfen Sie Ihre Eingaben."
+            );
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" />
-            <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" type="password" />
-            <button type="submit">Login</button>
-        </form>
+        <div className="login-container">
+            <div className="login-card">
+                <div className="login-header">
+                    <div className="adventure-icon">
+                        🗡️
+                    </div>
+                    <h1 className="login-title">Adventure Game</h1>
+                    <p className="login-subtitle">Willkommen zurück, Abenteurer!</p>
+                </div>
+                
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <div className="input-group">
+                        <input
+                            type="text"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                            placeholder="Benutzername"
+                            required
+                            disabled={isLoading}
+                        />
+                    </div>
+                    
+                    <div className="input-group">
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            placeholder="Passwort"
+                            required
+                            disabled={isLoading}
+                        />
+                    </div>
+                    
+                    <button
+                        type="submit"
+                        className="login-button"
+                        disabled={isLoading || !username || !password}
+                    >
+                        {isLoading ? "Wird eingeloggt..." : "Einloggen"}
+                    </button>
+                    
+                    {error && (
+                        <div className="error-message">
+                            {error}
+                        </div>
+                    )}
+                </form>
+            </div>
+        </div>
     );
 }

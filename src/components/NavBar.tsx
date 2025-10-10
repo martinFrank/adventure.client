@@ -1,10 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { useCurrentUser } from "../hooks/useCurrentUser";
+import "./NavBar.css";
 
 export default function NavBar() {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const user = useCurrentUser();
 
   const handleLogout = () => {
@@ -12,15 +14,57 @@ export default function NavBar() {
     navigate("/login");
   };
 
+  const isActiveLink = (path: string) => {
+    return location.pathname === path;
+  };
+
   return (
-    <nav style={{ display: "flex", gap: "1rem", padding: "1rem", background: "#eee" }}>
-      <Link to="/">Home</Link>
-      <Link to="/adventure">Adventure</Link>
-      <Link to="/profile">Profil</Link>
-      <span style={{ marginLeft: "auto" }}>
-        {user ? `Eingeloggt als ${user.username}` : ""}
-      </span>
-      <button onClick={handleLogout}>Logout</button>
+    <nav className="navbar">
+      <div className="navbar-content">
+        <Link to="/" className="navbar-brand">
+          <div className="navbar-icon">🗡️</div>
+          Adventure Game
+        </Link>
+        
+        <ul className="navbar-nav">
+          <li>
+            <Link
+              to="/"
+              className={`navbar-link ${isActiveLink('/') ? 'active' : ''}`}
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/adventure"
+              className={`navbar-link ${isActiveLink('/adventure') ? 'active' : ''}`}
+            >
+              Adventure
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/profile"
+              className={`navbar-link ${isActiveLink('/profile') ? 'active' : ''}`}
+            >
+              Profil
+            </Link>
+          </li>
+        </ul>
+
+        <div className="navbar-user">
+          {user && (
+            <div className="navbar-user-info">
+              <span className="navbar-username">{user.firstName} {user.lastName}</span>
+              <span className="navbar-status">@{user.username}</span>
+            </div>
+          )}
+          <button onClick={handleLogout} className="navbar-logout">
+            Logout
+          </button>
+        </div>
+      </div>
     </nav>
   );
 }
