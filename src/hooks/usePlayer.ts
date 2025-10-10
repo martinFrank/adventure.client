@@ -5,12 +5,7 @@ interface Player {
   name: string;
   playerClass: string;
   playerRace: string;
-  level?: number;
   currentLocationId?: string;
-  inventory?: string[];
-  health?: number;
-  maxHealth?: number;
-  [key: string]: any; // für zusätzliche Player-Eigenschaften
 }
 
 export function usePlayer() {

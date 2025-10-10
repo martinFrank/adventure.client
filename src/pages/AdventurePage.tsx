@@ -76,7 +76,6 @@ export default function AdventurePage() {
                   <span>Charakter: {player.name}</span>
                   <span className="character-details">
                     {player.playerRace} {player.playerClass}
-                    {player.level && ` (Level ${player.level})`}
                   </span>
                 </div>
               )}
