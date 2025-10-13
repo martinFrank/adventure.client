@@ -142,6 +142,7 @@
 }
 
 .locations-panel,
+.actions-panel,
 .actors-panel,
 .quests-panel {
   background: var(--card-background);
@@ -155,6 +156,7 @@
 }
 
 .locations-panel::before,
+.actions-panel::before,
 .actors-panel::before,
 .quests-panel::before {
   content: '';
@@ -173,6 +175,7 @@
 }
 
 .locations-panel h3,
+.actions-panel h3,
 .actors-panel h3,
 .quests-panel h3 {
   margin: 0 0 var(--spacing-lg) 0;
@@ -190,6 +193,7 @@
 }
 
 .location-card,
+.action-card,
 .actor-card,
 .quest-card {
   background: rgba(255, 255, 255, 0.05);
@@ -211,6 +215,7 @@
 }
 
 .location-card:hover,
+.action-card:hover,
 .actor-card:hover,
 .quest-card:hover {
   background: rgba(255, 255, 255, 0.08);
@@ -220,6 +225,7 @@
 }
 
 .location-card h4,
+.action-card h4,
 .actor-card h4,
 .quest-card h4 {
   margin: 0 0 var(--spacing-sm) 0;
@@ -230,6 +236,7 @@
 }
 
 .location-card p,
+.action-card p,
 .actor-card p,
 .quest-card p {
   margin: 0 0 var(--spacing-md) 0;
@@ -253,11 +260,25 @@
   font-size: var(--font-size-sm);
 }
 
+.actions-list,
 .actors-list,
 .quests-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--spacing-md);
+}
+
+.action-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-md);
+}
+
+.skill,
+.difficulty {
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
 }
 
 .quest-card.completed {
@@ -309,12 +330,14 @@
   }
 
   .locations-grid,
+  .actions-list,
   .actors-list,
   .quests-list {
     grid-template-columns: 1fr;
   }
 
   .location-card,
+  .action-card,
   .actor-card,
   .quest-card {
     padding: var(--spacing-md);

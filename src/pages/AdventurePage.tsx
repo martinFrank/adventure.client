@@ -3,14 +3,16 @@ import { useAdventure } from "../hooks/useAdventure";
 import { usePlayer } from "../hooks/usePlayer";
 import { useCurrentLocation } from "../hooks/useCurrentLocation";
 import { useCurrentActors } from "../hooks/useCurrentActors";
+import { useCurrentActions } from "../hooks/useCurrentActions";
 import './AdventurePage.css';
 
 export default function AdventurePage() {
   const user = useCurrentUser();
-  const { adventure, loading: adventureLoading, error: adventureError } = useAdventure();
+  //const { adventure, loading: adventureLoading, error: adventureError } = useAdventure();
   const { player, loading: playerLoading, error: playerError } = usePlayer();
   const { location, loading: locationLoading, error: locationError } = useCurrentLocation();
   const { actors, loading: actorsLoading, error: actorsError } = useCurrentActors();
+  const { actions, loading: actionsLoading, error: actionsError } = useCurrentActions();
 
   if (!user) {
     return (
@@ -25,7 +27,7 @@ export default function AdventurePage() {
     );
   }
 
-  if (adventureLoading || playerLoading || locationLoading || actorsLoading) {
+  if (playerLoading || locationLoading || actorsLoading || actionsLoading) {
     return (
       <div className="adventure-page">
         <div className="adventure-content">
@@ -38,34 +40,22 @@ export default function AdventurePage() {
     );
   }
 
-  if (adventureError || playerError || locationError || actorsError) {
+  if (playerError || locationError || actorsError || actionsError) {
     return (
       <div className="adventure-page">
         <div className="adventure-content">
           <div className="adventure-error">
             <h2>⚠️ Fehler beim Laden der Daten</h2>
-            {adventureError && <p>Adventure: {adventureError}</p>}
             {playerError && <p>Spieler: {playerError}</p>}
             {locationError && <p>Location: {locationError}</p>}
             {actorsError && <p>Actors: {actorsError}</p>}
+            {actionsError && <p>Actions: {actionsError}</p>}
           </div>
         </div>
       </div>
     );
   }
 
-  if (!adventure) {
-    return (
-      <div className="adventure-page">
-        <div className="adventure-content">
-          <div className="adventure-error">
-            <h2>📭 Keine Adventure-Daten verfügbar</h2>
-            <p>Es konnten keine Adventure-Daten geladen werden.</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="adventure-page">
@@ -88,11 +78,6 @@ export default function AdventurePage() {
             </div>
           </div>
         </header>
-
-        <section className="plot-section">
-          <h2>📖 Geschichte</h2>
-          <p className="plot-text">{adventure.plot}</p>
-        </section>
 
         <div className="game-panels">
           <section className="locations-panel">
@@ -128,27 +113,26 @@ export default function AdventurePage() {
             </div>
           </section>
 
-          <section className="quests-panel">
-            <h3>🎯 Quests ({adventure.quests?.length || 0})</h3>
-            <div className="quests-list">
-              {adventure.quests?.map((quest) => (
-                <div key={quest.id} className={`quest-card ${quest.isCompleted ? 'completed' : 'active'}`}>
-                  <h4>
-                    {quest.isCompleted ? '✅' : '🎯'} {quest.id.replace(/_/g, ' ')}
-                  </h4>
-                  <p>{quest.plot}</p>
-                  <div className="quest-status">
-                    <span className={`status ${quest.isCompleted ? 'completed' : 'active'}`}>
-                      {quest.isCompleted ? 'Abgeschlossen' : 'Aktiv'}
-                    </span>
-                    {quest.taskIds && quest.taskIds.length > 0 && (
-                      <small>📋 Aufgaben: {quest.taskIds.length}</small>
-                    )}
+          <section className="actions-panel">
+            <h3>⚡ Verfügbare Aktionen ({actions?.length || 0})</h3>
+            <div className="actions-list">
+              {actions && actions.length > 0 ? (
+                actions.map((action) => (
+                  <div key={action.id} className="action-card">
+                    <h4>⚡ {action.description}</h4>
+                    <div className="action-details">
+                      <span className="skill">🎯 {action.skill}</span>
+                      <span className="difficulty">📊 {action.difficulty}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p>Keine Aktionen verfügbar</p>
+              )}
             </div>
           </section>
+
+
         </div>
       </div>
     </div>
