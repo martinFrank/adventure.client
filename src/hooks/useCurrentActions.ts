@@ -13,23 +13,27 @@ export function useCurrentActions() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchCurrentActions = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get('/game/current-actions');
-        setActions(response.data);
-        setError(null);
-      } catch (err) {
-        setError('Failed to load current actions');
-        console.error('Error fetching current actions:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchCurrentActions = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get('/game/current-actions');
+      setActions(response.data);
+      setError(null);
+    } catch (err) {
+      setError('Failed to load current actions');
+      console.error('Error fetching current actions:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchCurrentActions();
   }, []);
 
-  return { actions, loading, error };
+  const refetch = () => {
+    fetchCurrentActions();
+  };
+
+  return { actions, loading, error, refetch };
 }

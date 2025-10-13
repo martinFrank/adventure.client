@@ -13,23 +13,27 @@ export function useCurrentActors() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchCurrentActors = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get('/game/current-actors');
-        setActors(response.data);
-        setError(null);
-      } catch (err) {
-        setError('Failed to load current actors');
-        console.error('Error fetching current actors:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchCurrentActors = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get('/game/current-actors');
+      setActors(response.data);
+      setError(null);
+    } catch (err) {
+      setError('Failed to load current actors');
+      console.error('Error fetching current actors:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchCurrentActors();
   }, []);
 
-  return { actors, loading, error };
+  const refetch = () => {
+    fetchCurrentActors();
+  };
+
+  return { actors, loading, error, refetch };
 }

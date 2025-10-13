@@ -13,23 +13,27 @@ export function useCurrentDestinations() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchCurrentDestinations = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get('/game/current-destinations');
-        setDestinations(response.data);
-        setError(null);
-      } catch (err) {
-        setError('Failed to load current destinations');
-        console.error('Error fetching current destinations:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchCurrentDestinations = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get('/game/current-destinations');
+      setDestinations(response.data);
+      setError(null);
+    } catch (err) {
+      setError('Failed to load current destinations');
+      console.error('Error fetching current destinations:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchCurrentDestinations();
   }, []);
 
-  return { destinations, loading, error };
+  const refetch = () => {
+    fetchCurrentDestinations();
+  };
+
+  return { destinations, loading, error, refetch };
 }

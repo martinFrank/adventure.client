@@ -13,23 +13,27 @@ export function useCurrentLocation() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchCurrentLocation = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get('/game/current-location');
-        setLocation(response.data);
-        setError(null);
-      } catch (err) {
-        setError('Failed to load current location');
-        console.error('Error fetching current location:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchCurrentLocation = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get('/game/current-location');
+      setLocation(response.data);
+      setError(null);
+    } catch (err) {
+      setError('Failed to load current location');
+      console.error('Error fetching current location:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchCurrentLocation();
   }, []);
 
-  return { location, loading, error };
+  const refetch = () => {
+    fetchCurrentLocation();
+  };
+
+  return { location, loading, error, refetch };
 }

@@ -5,16 +5,31 @@ import { useCurrentLocation } from "../hooks/useCurrentLocation";
 import { useCurrentActors } from "../hooks/useCurrentActors";
 import { useCurrentActions } from "../hooks/useCurrentActions";
 import { useCurrentDestinations } from "../hooks/useCurrentDestinations";
+import { api } from "../api";
 import './AdventurePage.css';
 
 export default function AdventurePage() {
   const user = useCurrentUser();
   //const { adventure, loading: adventureLoading, error: adventureError } = useAdventure();
   const { player, loading: playerLoading, error: playerError } = usePlayer();
-  const { location, loading: locationLoading, error: locationError } = useCurrentLocation();
-  const { actors, loading: actorsLoading, error: actorsError } = useCurrentActors();
-  const { actions, loading: actionsLoading, error: actionsError } = useCurrentActions();
-  const { destinations, loading: destinationsLoading, error: destinationsError } = useCurrentDestinations();
+  const { location, loading: locationLoading, error: locationError, refetch: refetchLocation } = useCurrentLocation();
+  const { actors, loading: actorsLoading, error: actorsError, refetch: refetchActors } = useCurrentActors();
+  const { actions, loading: actionsLoading, error: actionsError, refetch: refetchActions } = useCurrentActions();
+  const { destinations, loading: destinationsLoading, error: destinationsError, refetch: refetchDestinations } = useCurrentDestinations();
+
+  const handleDestinationClick = async (destinationId: string) => {
+    try {
+      await api.post('/player/destination', { locationId: destinationId });
+      // Refetch all data to update the game state
+      refetchLocation();
+      refetchActors();
+      refetchActions();
+      refetchDestinations();
+    } catch (error) {
+      console.error('Failed to move to destination:', error);
+      // You might want to show an error message to the user here
+    }
+  };
 
   if (!user) {
     return (
@@ -121,7 +136,7 @@ export default function AdventurePage() {
             <div className="destinations-list">
               {destinations && destinations.length > 0 ? (
                 destinations.map((destination) => (
-                  <div key={destination.id} className="destination-card">
+                  <div key={destination.id} className="destination-card" onClick={() => handleDestinationClick(destination.id)}>
                     <h4>📍 {destination.type.replace(/_/g, ' ')}</h4>
                     <p>{destination.generation}</p>
                     <div className="connections">
