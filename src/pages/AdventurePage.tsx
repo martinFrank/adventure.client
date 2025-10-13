@@ -4,6 +4,7 @@ import { usePlayer } from "../hooks/usePlayer";
 import { useCurrentLocation } from "../hooks/useCurrentLocation";
 import { useCurrentActors } from "../hooks/useCurrentActors";
 import { useCurrentActions } from "../hooks/useCurrentActions";
+import { useCurrentDestinations } from "../hooks/useCurrentDestinations";
 import './AdventurePage.css';
 
 export default function AdventurePage() {
@@ -13,6 +14,7 @@ export default function AdventurePage() {
   const { location, loading: locationLoading, error: locationError } = useCurrentLocation();
   const { actors, loading: actorsLoading, error: actorsError } = useCurrentActors();
   const { actions, loading: actionsLoading, error: actionsError } = useCurrentActions();
+  const { destinations, loading: destinationsLoading, error: destinationsError } = useCurrentDestinations();
 
   if (!user) {
     return (
@@ -27,7 +29,7 @@ export default function AdventurePage() {
     );
   }
 
-  if (playerLoading || locationLoading || actorsLoading || actionsLoading) {
+  if (playerLoading || locationLoading || actorsLoading || actionsLoading || destinationsLoading) {
     return (
       <div className="adventure-page">
         <div className="adventure-content">
@@ -40,7 +42,7 @@ export default function AdventurePage() {
     );
   }
 
-  if (playerError || locationError || actorsError || actionsError) {
+  if (playerError || locationError || actorsError || actionsError || destinationsError) {
     return (
       <div className="adventure-page">
         <div className="adventure-content">
@@ -50,6 +52,7 @@ export default function AdventurePage() {
             {locationError && <p>Location: {locationError}</p>}
             {actorsError && <p>Actors: {actorsError}</p>}
             {actionsError && <p>Actions: {actionsError}</p>}
+            {destinationsError && <p>Destinations: {destinationsError}</p>}
           </div>
         </div>
       </div>
@@ -109,6 +112,25 @@ export default function AdventurePage() {
                 ))
               ) : (
                 <p>Keine Charaktere am aktuellen Ort</p>
+              )}
+            </div>
+          </section>
+
+          <section className="destinations-panel">
+            <h3>🗺️ Benachbarte Orte ({destinations?.length || 0})</h3>
+            <div className="destinations-list">
+              {destinations && destinations.length > 0 ? (
+                destinations.map((destination) => (
+                  <div key={destination.id} className="destination-card">
+                    <h4>📍 {destination.type.replace(/_/g, ' ')}</h4>
+                    <p>{destination.generation}</p>
+                    <div className="connections">
+                      <small>🔗 Verbindungen: {destination.toLocationIds?.length || 0}</small>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>Keine benachbarten Orte verfügbar</p>
               )}
             </div>
           </section>

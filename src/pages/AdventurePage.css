@@ -144,6 +144,7 @@
 .locations-panel,
 .actions-panel,
 .actors-panel,
+.destinations-panel,
 .quests-panel {
   background: var(--card-background);
   backdrop-filter: blur(10px);
@@ -158,6 +159,7 @@
 .locations-panel::before,
 .actions-panel::before,
 .actors-panel::before,
+.destinations-panel::before,
 .quests-panel::before {
   content: '';
   position: absolute;
@@ -177,6 +179,7 @@
 .locations-panel h3,
 .actions-panel h3,
 .actors-panel h3,
+.destinations-panel h3,
 .quests-panel h3 {
   margin: 0 0 var(--spacing-lg) 0;
   color: var(--primary-color);
@@ -195,6 +198,7 @@
 .location-card,
 .action-card,
 .actor-card,
+.destination-card,
 .quest-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-color);
@@ -217,6 +221,7 @@
 .location-card:hover,
 .action-card:hover,
 .actor-card:hover,
+.destination-card:hover,
 .quest-card:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--border-hover);
@@ -227,6 +232,7 @@
 .location-card h4,
 .action-card h4,
 .actor-card h4,
+.destination-card h4,
 .quest-card h4 {
   margin: 0 0 var(--spacing-sm) 0;
   color: var(--text-primary);
@@ -238,6 +244,7 @@
 .location-card p,
 .action-card p,
 .actor-card p,
+.destination-card p,
 .quest-card p {
   margin: 0 0 var(--spacing-md) 0;
   font-size: var(--font-size-base);
@@ -262,6 +269,7 @@
 
 .actions-list,
 .actors-list,
+.destinations-list,
 .quests-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -332,6 +340,7 @@
   .locations-grid,
   .actions-list,
   .actors-list,
+  .destinations-list,
   .quests-list {
     grid-template-columns: 1fr;
   }
@@ -349,6 +358,7 @@
   .plot-section,
   .locations-panel,
   .actors-panel,
+  .destinations-panel,
   .quests-panel {
     padding: var(--spacing-lg);
   }
