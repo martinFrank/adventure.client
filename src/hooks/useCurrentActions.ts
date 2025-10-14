@@ -6,6 +6,7 @@ interface SkillAction {
   description: string;
   skill: string;
   difficulty: string;
+  actionText: string;
 }
 
 export function useCurrentActions() {

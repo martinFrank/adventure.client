@@ -1,5 +1,4 @@
 import { useCurrentUser } from "../hooks/useCurrentUser";
-import { useAdventure } from "../hooks/useAdventure";
 import { usePlayer } from "../hooks/usePlayer";
 import { useCurrentLocation } from "../hooks/useCurrentLocation";
 import { useCurrentActors } from "../hooks/useCurrentActors";
@@ -157,6 +156,7 @@ export default function AdventurePage() {
                 actions.map((action) => (
                   <div key={action.id} className="action-card">
                     <h4>⚡ {action.description}</h4>
+                    <p>{action.actionText}</p>
                     <div className="action-details">
                       <span className="skill">🎯 {action.skill}</span>
                       <span className="difficulty">📊 {action.difficulty}</span>
