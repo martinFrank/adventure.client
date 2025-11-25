@@ -34,7 +34,7 @@
 
 // export default App
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./auth/AuthContext";
 import LoginPage from "./auth/LoginPage";
 import HomePage from "./pages/HomePage.tsx";
@@ -47,7 +47,7 @@ export default function App() {
  
 
   return (
-    <BrowserRouter>
+    <>
       {token && <NavBar />}
       <Routes>
         <Route path="/login" element={<LoginPage />} />
@@ -55,8 +55,6 @@ export default function App() {
         <Route path="/adventure" element={token ? <AdventurePage /> : <Navigate to="/login" />} />
         <Route path="/profile" element={token ? <ProfilePage /> : <Navigate to="/login" />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
-
-
