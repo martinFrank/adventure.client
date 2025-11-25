@@ -18,7 +18,7 @@ export default function AdventurePage() {
 
   const handleDestinationClick = async (destinationId: string) => {
     try {
-      await api.post('/player/destination', { locationId: destinationId });
+      await api.post('/api/player/destination', { locationId: destinationId });
       // Refetch all data to update the game state
       refetchLocation();
       refetchActors();
