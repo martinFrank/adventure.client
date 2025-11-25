@@ -13,7 +13,7 @@ export function useCurrentUser() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    api.get("/users/me")
+    api.get("/api/users/me")
       .then(res => setUser(res.data))
       .catch(() => setUser(null));
   }, []);

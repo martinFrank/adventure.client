@@ -17,7 +17,7 @@ export function useCurrentActions() {
   const fetchCurrentActions = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/game/current-actions');
+      const response = await api.get('/api/game/current-actions');
       setActions(response.data);
       setError(null);
     } catch (err) {

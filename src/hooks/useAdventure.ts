@@ -40,7 +40,7 @@ export function useAdventure() {
     const fetchAdventure = async () => {
       try {
         setLoading(true);
-        const response = await api.get('/game/adventure');
+        const response = await api.get('/api/game/adventure');
         setAdventure(response.data);
         setError(null);
       } catch (err) {

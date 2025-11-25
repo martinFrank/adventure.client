@@ -16,7 +16,7 @@ export function useCurrentLocation() {
   const fetchCurrentLocation = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/game/current-location');
+      const response = await api.get('/api/game/current-location');
       setLocation(response.data);
       setError(null);
     } catch (err) {

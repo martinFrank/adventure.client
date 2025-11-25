@@ -16,7 +16,7 @@ export function useCurrentDestinations() {
   const fetchCurrentDestinations = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/game/current-destinations');
+      const response = await api.get('/api/game/current-destinations');
       setDestinations(response.data);
       setError(null);
     } catch (err) {

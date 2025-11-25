@@ -17,7 +17,7 @@ export function usePlayer() {
     const fetchPlayer = async () => {
       try {
         setLoading(true);
-        const response = await api.get('/player/player');
+        const response = await api.get('/api/player/player');
         setPlayer(response.data);
         setError(null);
       } catch (err) {

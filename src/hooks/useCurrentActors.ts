@@ -16,7 +16,7 @@ export function useCurrentActors() {
   const fetchCurrentActors = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/game/current-actors');
+      const response = await api.get('/api/game/current-actors');
       setActors(response.data);
       setError(null);
     } catch (err) {
