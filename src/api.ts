@@ -2,10 +2,10 @@ import axios from "axios";
 
 export const api = axios.create({ 
   //for production
-  // baseURL: "https://elitegames.v6.rocks/adventure-game-api"
+  baseURL: "https://elitegames.v6.rocks/adventure-game-api"
 
   //for local development
-  baseURL: "https://localhost:8080/adventure-game-api"
+  //baseURL: "https://localhost:8080/adventure-game-api"
 });
 
 api.interceptors.request.use((config) => {
