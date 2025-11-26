@@ -1,6 +1,7 @@
 import axios from "axios"; 
 
-const basePath = process.env.VITE_FRONTEND_SUBPATH;
+
+const basePath = import.meta.env.VITE_BACKEND_API_URL; 
 
 export const api = axios.create({    
   baseURL: basePath 

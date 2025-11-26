@@ -6,8 +6,8 @@ import App from "./App";
 import { AuthProvider } from "./auth/AuthContext";
 import { BrowserRouter } from 'react-router-dom';
 import React from "react";
-
-const basePath = process.env.VITE_FRONTEND_SUBPATH;
+ 
+const basePath = import.meta.env.VITE_FRONTEND_SUBPATH; 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>    

@@ -11,6 +11,14 @@ RUN npm install
 # Projektdateien kopieren
 COPY . .
 
+# Build-Argumente empfangen
+ARG VITE_BACKEND_API_URL
+ARG VITE_FRONTEND_SUBPATH
+
+# Als Umgebungsvariablen setzen
+ENV VITE_BACKEND_API_URL=$VITE_BACKEND_API_URL
+ENV VITE_FRONTEND_SUBPATH=$VITE_FRONTEND_SUBPATH
+
 # Build erstellen
 RUN npm run build
 
