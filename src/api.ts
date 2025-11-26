@@ -1,11 +1,9 @@
-import axios from "axios";
+import axios from "axios"; 
 
-export const api = axios.create({ 
-  //for production
-  baseURL: "https://elitegames.v6.rocks/adventure-game-api"
+const basePath = process.env.VITE_FRONTEND_SUBPATH;
 
-  //for local development
-  //baseURL: "https://localhost:8080/adventure-game-api"
+export const api = axios.create({    
+  baseURL: basePath 
 });
 
 api.interceptors.request.use((config) => {

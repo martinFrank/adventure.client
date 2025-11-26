@@ -1,10 +1,13 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react'  
+
+const basePath = import.meta.env.VITE_FRONTEND_SUBPATH; 
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/adventure-game',
+  // base: '/adventure-game',
+  base: basePath
 })
 
 

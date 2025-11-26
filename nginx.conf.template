@@ -1,0 +1,9 @@
+server {
+    listen 80;
+
+    location  $VITE_FRONTEND_SUBPATH {
+        alias /usr/share/nginx/html/;  # Pfad zum React-Build Ordner im Container
+        try_files $uri $uri/  $VITE_FRONTEND_SUBPATH/index.html;
+    }
+ 
+}

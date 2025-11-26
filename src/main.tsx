@@ -7,19 +7,15 @@ import { AuthProvider } from "./auth/AuthContext";
 import { BrowserRouter } from 'react-router-dom';
 import React from "react";
 
+const basePath = process.env.VITE_FRONTEND_SUBPATH;
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>    
     <AuthProvider>
-      <BrowserRouter basename="/adventure-game">
+      <BrowserRouter basename={basePath}>
         <App />
       </BrowserRouter>
     </AuthProvider>    
   </React.StrictMode>
-
-  // <React.StrictMode>
-  //   <BrowserRouter basename="/adventure-game">
-  //     <App />
-  //   </BrowserRouter>
-  // </React.StrictMode>
 );
 

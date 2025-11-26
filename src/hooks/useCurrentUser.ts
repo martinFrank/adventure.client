@@ -12,6 +12,9 @@ export type User = {
 export function useCurrentUser() {
   const [user, setUser] = useState<User | null>(null);
 
+  console.log("baseurl={}",api.getUri);
+  console.log(import.meta.env)
+
   useEffect(() => {
     api.get("/api/users/me")
       .then(res => setUser(res.data))
