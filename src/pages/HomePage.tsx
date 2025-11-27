@@ -7,11 +7,11 @@ export default function HomePage() {
   return (
     <div className="page-container">
       <div className="page-content">
-        <div className="text-center" style={{ marginBottom: "var(--spacing-2xl)" }}>
+        <div className="text-center mb-xl">
           <div className="adventure-icon" style={{ margin: "0 auto var(--spacing-xl)" }}>
             🗡️
           </div>
-          <h1 className="title" style={{ fontSize: "var(--font-size-4xl)" }}>
+          <h1 className="title text-4xl">
             Willkommen bei Adventure Game
           </h1>
           <p className="subtitle">
@@ -19,19 +19,12 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-lg" style={{ marginBottom: "var(--spacing-2xl)" }}>
+        <div className="grid grid-cols-2 gap-lg mb-xl">
           <div className="card">
-            <h3 style={{
-              color: "var(--primary-color)",
-              fontSize: "var(--font-size-xl)",
-              marginBottom: "var(--spacing-md)"
-            }}>
+            <h3 className="text-xl font-bold text-primary mb-md">
               🎮 Spiel starten
             </h3>
-            <p style={{
-              color: "var(--text-secondary)",
-              marginBottom: "var(--spacing-lg)"
-            }}>
+            <p className="text-secondary mb-lg">
               Tauche ein in dein persönliches Abenteuer und erlebe spannende Quests und Herausforderungen.
             </p>
             <Link to="/adventure" className="btn btn-primary">
@@ -40,17 +33,10 @@ export default function HomePage() {
           </div>
 
           <div className="card">
-            <h3 style={{
-              color: "var(--primary-color)",
-              fontSize: "var(--font-size-xl)",
-              marginBottom: "var(--spacing-md)"
-            }}>
+            <h3 className="text-xl font-bold text-primary mb-md">
               👤 Profil verwalten
             </h3>
-            <p style={{
-              color: "var(--text-secondary)",
-              marginBottom: "var(--spacing-lg)"
-            }}>
+            <p className="text-secondary mb-lg">
               Verwalte deine Charakterinformationen und verfolge deinen Fortschritt im Spiel.
             </p>
             <Link to="/profile" className="btn btn-secondary">
@@ -61,21 +47,13 @@ export default function HomePage() {
 
         {user && (
           <div className="card text-center">
-            <h2 style={{
-              color: "var(--text-primary)",
-              marginBottom: "var(--spacing-md)"
-            }}>
+            <h2 className="text-primary font-bold text-2xl mb-md">
               Hallo, {user.firstName}! 👋
             </h2>
-            <p style={{ color: "var(--text-secondary)" }}>
+            <p className="text-secondary">
               Bereit für dein nächstes Abenteuer? Deine Reise wartet auf dich!
             </p>
-            <div style={{
-              marginTop: "var(--spacing-lg)",
-              display: "flex",
-              gap: "var(--spacing-md)",
-              justifyContent: "center"
-            }}>
+            <div className="flex gap-md justify-center mt-lg">
               <Link to="/adventure" className="btn btn-primary">
                 🎯 Adventure fortsetzen
               </Link>

@@ -1,4 +1,5 @@
 import { useCurrentUser } from "../hooks/useCurrentUser";
+import { Link } from "react-router-dom";
 
 export default function ProfilePage() {
   const user = useCurrentUser();
@@ -29,109 +30,37 @@ export default function ProfilePage() {
 
         <div className="grid grid-cols-2 gap-lg">
           <div className="card">
-            <h2 style={{
-              color: "var(--primary-color)",
-              fontSize: "var(--font-size-xl)",
-              marginBottom: "var(--spacing-lg)"
-            }}>
+            <h2 className="text-xl font-bold text-primary mb-lg">
               👤 Persönliche Informationen
             </h2>
-            
-            <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-md)" }}>
-              <div style={{
-                padding: "var(--spacing-md)",
-                background: "rgba(255, 255, 255, 0.05)",
-                borderRadius: "var(--radius-md)",
-                border: "1px solid var(--border-color)"
-              }}>
-                <label style={{
-                  color: "var(--text-secondary)",
-                  fontSize: "var(--font-size-sm)",
-                  display: "block",
-                  marginBottom: "var(--spacing-xs)"
-                }}>
-                  Benutzername
-                </label>
-                <span style={{
-                  color: "var(--text-primary)",
-                  fontSize: "var(--font-size-lg)",
-                  fontWeight: "600"
-                }}>
-                  {user.username}
-                </span>
+
+            <div className="flex flex-col gap-md">
+              <div className="info-group">
+                <label>Benutzername</label>
+                <span>{user.username}</span>
               </div>
 
-              <div style={{
-                padding: "var(--spacing-md)",
-                background: "rgba(255, 255, 255, 0.05)",
-                borderRadius: "var(--radius-md)",
-                border: "1px solid var(--border-color)"
-              }}>
-                <label style={{
-                  color: "var(--text-secondary)",
-                  fontSize: "var(--font-size-sm)",
-                  display: "block",
-                  marginBottom: "var(--spacing-xs)"
-                }}>
-                  Name
-                </label>
-                <span style={{
-                  color: "var(--text-primary)",
-                  fontSize: "var(--font-size-lg)"
-                }}>
-                  {user.firstName} {user.lastName}
-                </span>
+              <div className="info-group">
+                <label>Name</label>
+                <span>{user.firstName} {user.lastName}</span>
               </div>
 
-              <div style={{
-                padding: "var(--spacing-md)",
-                background: "rgba(255, 255, 255, 0.05)",
-                borderRadius: "var(--radius-md)",
-                border: "1px solid var(--border-color)"
-              }}>
-                <label style={{
-                  color: "var(--text-secondary)",
-                  fontSize: "var(--font-size-sm)",
-                  display: "block",
-                  marginBottom: "var(--spacing-xs)"
-                }}>
-                  E-Mail
-                </label>
-                <span style={{
-                  color: "var(--text-primary)",
-                  fontSize: "var(--font-size-lg)"
-                }}>
-                  {user.email}
-                </span>
+              <div className="info-group">
+                <label>E-Mail</label>
+                <span>{user.email}</span>
               </div>
             </div>
           </div>
 
           <div className="card">
-            <h2 style={{
-              color: "var(--primary-color)",
-              fontSize: "var(--font-size-xl)",
-              marginBottom: "var(--spacing-lg)"
-            }}>
+            <h2 className="text-xl font-bold text-primary mb-lg">
               🛡️ Konto & Berechtigungen
             </h2>
-            
-            <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-md)" }}>
-              <div style={{
-                padding: "var(--spacing-md)",
-                background: "rgba(255, 255, 255, 0.05)",
-                borderRadius: "var(--radius-md)",
-                border: "1px solid var(--border-color)"
-              }}>
-                <label style={{
-                  color: "var(--text-secondary)",
-                  fontSize: "var(--font-size-sm)",
-                  display: "block",
-                  marginBottom: "var(--spacing-xs)"
-                }}>
-                  Rollen
-                </label>
-                <div style={{ display: "flex", gap: "var(--spacing-sm)", flexWrap: "wrap" }}>
+
+            <div className="flex flex-col gap-md">
+              <div className="info-group">
+                <label>Rollen</label>
+                <div className="flex gap-sm flex-wrap">
                   {user.roles?.map((role, index) => (
                     <span
                       key={index}
@@ -140,59 +69,28 @@ export default function ProfilePage() {
                       {role}
                     </span>
                   )) || (
-                    <span style={{ color: "var(--text-muted)" }}>Keine Rollen zugewiesen</span>
-                  )}
+                      <span className="text-muted">Keine Rollen zugewiesen</span>
+                    )}
                 </div>
               </div>
 
-              <div style={{
-                padding: "var(--spacing-lg)",
-                background: "rgba(100, 108, 255, 0.1)",
-                borderRadius: "var(--radius-md)",
-                border: "1px solid rgba(100, 108, 255, 0.2)",
-                textAlign: "center" as const
-              }}>
-                <div style={{
-                  color: "var(--primary-color)",
-                  fontSize: "var(--font-size-2xl)",
-                  marginBottom: "var(--spacing-sm)"
-                }}>
-                  ✨
-                </div>
-                <h3 style={{
-                  color: "var(--primary-color)",
-                  marginBottom: "var(--spacing-sm)"
-                }}>
-                  Abenteurer Status
-                </h3>
-                <p style={{
-                  color: "var(--text-secondary)",
-                  fontSize: "var(--font-size-sm)"
-                }}>
-                  Aktiver Spieler
-                </p>
+              <div className="status-card">
+                <div className="status-icon">✨</div>
+                <h3>Abenteurer Status</h3>
+                <p>Aktiver Spieler</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="card" style={{ marginTop: "var(--spacing-xl)" }}>
-          <h2 style={{
-            color: "var(--primary-color)",
-            fontSize: "var(--font-size-xl)",
-            marginBottom: "var(--spacing-lg)"
-          }}>
+        <div className="card mt-xl">
+          <h2 className="text-xl font-bold text-primary mb-lg">
             🎮 Schnellaktionen
           </h2>
-          <div style={{
-            display: "flex",
-            gap: "var(--spacing-md)",
-            justifyContent: "center",
-            flexWrap: "wrap" as const
-          }}>
-            <button className="btn btn-primary">
+          <div className="flex gap-md justify-center flex-wrap">
+            <Link to="/adventure" className="btn btn-primary">
               🎯 Adventure starten
-            </button>
+            </Link>
             <button className="btn btn-secondary">
               📊 Statistiken
             </button>

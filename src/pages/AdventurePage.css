@@ -1,5 +1,5 @@
 .adventure-page {
-  background: var(--background-gradient);
+  /* background handled by body */
   min-height: 100vh;
   padding: var(--spacing-lg);
   color: var(--text-primary);
@@ -11,8 +11,8 @@
 }
 
 .adventure-header {
-  background: var(--card-background);
-  backdrop-filter: blur(10px);
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   margin-bottom: var(--spacing-xl);
@@ -37,7 +37,7 @@
 .adventure-header h1 {
   color: var(--text-primary);
   margin: 0 0 var(--spacing-lg) 0;
-  font-size: var(--font-size-3xl);
+  font-size: 2rem;
   font-weight: 700;
   background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   -webkit-background-clip: text;
@@ -56,7 +56,7 @@
   padding: var(--spacing-sm) var(--spacing-md);
   background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-sm);
-  font-size: var(--font-size-sm);
+  font-size: 0.875rem;
 }
 
 .character-info {
@@ -68,10 +68,11 @@
   color: white;
   border-radius: var(--radius-md);
   font-weight: 600;
+  box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 .character-details {
-  font-size: var(--font-size-sm);
+  font-size: 0.875rem;
   opacity: 0.9;
 }
 
@@ -82,15 +83,15 @@
   gap: var(--spacing-md);
   padding: var(--spacing-2xl);
   color: var(--text-secondary);
-  background: var(--card-background);
+  background: var(--bg-card);
   border-radius: var(--radius-lg);
   margin: var(--spacing-xl);
 }
 
 .adventure-error {
-  background: rgba(255, 107, 107, 0.1);
-  border: 1px solid rgba(255, 107, 107, 0.2);
-  color: var(--error-color);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: var(--error);
   padding: var(--spacing-xl);
   border-radius: var(--radius-lg);
   text-align: center;
@@ -98,8 +99,8 @@
 }
 
 .plot-section {
-  background: var(--card-background);
-  backdrop-filter: blur(10px);
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
   padding: var(--spacing-xl);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
@@ -116,20 +117,20 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--success-color), #22c55e, var(--success-color));
+  background: linear-gradient(90deg, var(--success), #4ade80, var(--success));
   background-size: 200% 100%;
   animation: shimmer 3s ease-in-out infinite;
 }
 
 .plot-section h2 {
-  color: var(--success-color);
+  color: var(--success);
   margin: 0 0 var(--spacing-md) 0;
-  font-size: var(--font-size-xl);
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
 .plot-text {
-  font-size: var(--font-size-lg);
+  font-size: 1.125rem;
   line-height: 1.6;
   color: var(--text-secondary);
   margin: 0;
@@ -146,8 +147,8 @@
 .actors-panel,
 .destinations-panel,
 .quests-panel {
-  background: var(--card-background);
-  backdrop-filter: blur(10px);
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
@@ -183,7 +184,7 @@
 .quests-panel h3 {
   margin: 0 0 var(--spacing-lg) 0;
   color: var(--primary-color);
-  font-size: var(--font-size-xl);
+  font-size: 1.25rem;
   font-weight: 600;
   padding-bottom: var(--spacing-md);
   border-bottom: 1px solid var(--border-color);
@@ -204,13 +205,13 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .location-card.current-location {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.15));
+  background: rgba(var(--primary-hue), var(--primary-sat), var(--primary-light), 0.1);
   border: 2px solid var(--primary-color);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 20px rgba(var(--primary-hue), var(--primary-sat), var(--primary-light), 0.2);
 }
 
 .location-card.current-location h4 {
@@ -238,7 +239,7 @@
   margin: 0 0 var(--spacing-sm) 0;
   color: var(--text-primary);
   text-transform: capitalize;
-  font-size: var(--font-size-lg);
+  font-size: 1.125rem;
   font-weight: 600;
 }
 
@@ -248,7 +249,7 @@
 .destination-card p,
 .quest-card p {
   margin: 0 0 var(--spacing-md) 0;
-  font-size: var(--font-size-base);
+  font-size: 1rem;
   line-height: 1.5;
   color: var(--text-secondary);
 }
@@ -265,7 +266,7 @@
 .connections small,
 .actor-location small {
   color: var(--text-muted);
-  font-size: var(--font-size-sm);
+  font-size: 0.875rem;
 }
 
 .actions-list,
@@ -287,20 +288,18 @@
 .skill,
 .difficulty {
   color: var(--text-muted);
-  font-size: var(--font-size-sm);
+  font-size: 0.875rem;
 }
 
 .quest-card.completed {
-  background: rgba(74, 222, 128, 0.1);
-  border-color: rgba(74, 222, 128, 0.3);
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
 }
 
 .quest-card.active {
-  background: rgba(251, 191, 36, 0.1);
-  border-color: rgba(251, 191, 36, 0.3);
+  background: rgba(234, 179, 8, 0.1);
+  border-color: rgba(234, 179, 8, 0.3);
 }
-
-/* Status indicators are now using global styles from global.css */
 
 @media (min-width: 768px) {
   .player-info {
@@ -316,7 +315,7 @@
   }
 
   .character-details {
-    font-size: var(--font-size-base);
+    font-size: 1rem;
   }
 }
 
@@ -335,7 +334,7 @@
   }
 
   .adventure-header h1 {
-    font-size: var(--font-size-2xl);
+    font-size: 1.5rem;
   }
 
   .locations-grid,
@@ -365,6 +364,6 @@
   }
 
   .adventure-header h1 {
-    font-size: var(--font-size-xl);
+    font-size: 1.25rem;
   }
 }
